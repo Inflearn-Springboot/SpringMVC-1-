@@ -34,7 +34,7 @@
  - 자바 백엔드 웹 기술 역사
 -------------
 #### 2. 서블릿
-
+ - 클라이언트의 요청을 처리하고, 그 결과를 반환하는 Servlet 클래스의 구현 규칙을 지킨 자바 웹 프로그래밍 기술
  - HttpServletRequest
    - https://github.com/Inflearn-Springboot/SpringMVC-1-/blob/main/servlet/src/main/java/hello/servlet/basic/request/RequestHeaderServlet.java
 
