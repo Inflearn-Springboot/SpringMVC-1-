@@ -37,10 +37,22 @@
 
  - HttpServletRequest
    - https://github.com/Inflearn-Springboot/SpringMVC-1-/blob/main/servlet/src/main/java/hello/servlet/basic/request/RequestHeaderServlet.java
+
+   - **GET - 쿼리 파라미터** : (/url**?username=hello&age=20**) 메시지 바디 없이, URL의 쿼리 파라미터에 데이터를 포함해서 전달 예) 검색, 필터, 페이징등에서 많이 사용하는 방식
+   - **POST - HTML Form** : (content-type: application/x-www-form-urlencoded)메시지 바디에 쿼리 파리미터 형식으로 전달 username=hello&age=20 예) 회원 가입, 상품 주문, HTML Form 사용
+   - **HTTP message body**에 데이터를 직접 담아서 요청 HTTP API에서 주로 사용, JSON, XML, TEXT <- 데이터 형식은 주로 JSON 사용 POST, PUT, PATCH
  - HTTP 요청 데이터 - GET, POST
+   - GET : `request.getParameterNames().asIterator()
+                .forEachRemaining(paramName -> System.out.println(paramName + "=" + request.getParameter(paramName)));`
+   - POST : application/x-www-form-urlencoded` 형식은 앞서 GET에서 살펴본 쿼리 파라미터 형식과 같다. 따라서 **쿼리 파라미터 조회 메서드를 그대로 사용**하면 된다.
  - HTTP 요청 데이터 - 단순 텍스트, JSON
- - HttpServletResponse
- - API JSON
+   - 단순 텍스트 : `ServletInputStream inputStream = request.getInputStream();
+        String messageBody = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);`
+   - JSON : HelloData helloData = objectMapper.readValue(messageBody, HelloData.class);
+     <img width="200" alt="image" src="https://github.com/Inflearn-Springboot/SpringMVC-1-/assets/96871403/d934cd8a-83a2-4af4-9191-1de69f01c03c">
+
+ - HttpServletResponse (HTTP 응답 데이터 - HTML, API JSON)
+   - https://github.com/Inflearn-Springboot/SpringMVC-1-/tree/main/servlet/src/main/java/hello/servlet/basic/response
 -------------
 #### 3. 서블릿, JSP, MVC 패턴
 -------------
