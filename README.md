@@ -83,6 +83,7 @@
 ![image](https://github.com/Inflearn-Springboot/SpringMVC-1-/assets/96871403/01bf31b7-3ef2-4ba0-becf-a0e27417bdbc)
  - Model 추가 : 서블릿 종속성 제거
 request 객체를 Model로 사용하는 대신에 별도의 Model 객체를 만들어서 반환하면 된다.
+
 ![image](https://github.com/Inflearn-Springboot/SpringMVC-1-/assets/96871403/33162f73-52c5-4fb0-8d4b-f5074d7195de)
 
  - 실용적이고 유연한 컨트롤러로 업그레이드
@@ -90,6 +91,44 @@ request 객체를 Model로 사용하는 대신에 별도의 Model 객체를 만�
 
 -------------
 #### 5. 스프링 MVC - 구조 이해
+
+- 스프링 MVC 전체구조
+  ![image](https://github.com/Inflearn-Springboot/SpringMVC-1-/assets/96871403/18acdece-3b6c-4ce8-a4b6-57c639360c5c)
+DispatcherServlet 서블릿 등록
+DispatcherServlet 도 부모 클래스에서 HttpServlet 을 상속 받아서 사용하고, 서블릿으로 동작한다.
+DispatcherServlet FrameworkServlet HttpServletBean HttpServlet
+스프링 부트는 DispatcherServlet 을 서블릿으로 자동으로 등록하면서 모든 경로( urlPatterns="/" )에
+대해서 매핑한다.
+참고: 더 자세한 경로가 우선순위가 높다. 그래서 기존에 등록한 서블릿도 함께 동작한다.
+
+동작 순서 : 핸들러 조회 -> 핸들러 어댑터 조회 -> 핸들러 어댑터 실행 -> 핸들러 실행 -> viewResolver 호출 -> view 반환 -> 뷰 렌더링
+
+- 핸들러 매핑과 핸들러 어댑터
+
+HandlerMapping(핸들러 매핑)
+핸들러 매핑에서 이 컨트롤러를 찾을 수 있어야 한다.
+예) 스프링 빈의 이름으로 핸들러를 찾을 수 있는 핸들러 매핑이 필요하다.
+HandlerAdapter(핸들러 어댑터)
+핸들러 매핑을 통해서 찾은 핸들러를 실행할 수 있는 핸들러 어댑터가 필요하다.
+예) Controller 인터페이스를 실행할 수 있는 핸들러 어댑터를 찾고 실행해야 한다.
+
+- 뷰 리졸버
+  
+application.properties 에 다음 코드를 추가하자
+spring.mvc.view.prefix=/WEB-INF/views/
+spring.mvc.view.suffix=.jsp
+
+스프링 부트는 InternalResourceViewResolver 라는 뷰 리졸버를 자동으로 등록하는데, 이때 application.properties 에 등록한 spring.mvc.view.prefix , spring.mvc.view.suffix 설정 정보를 사용해서 등록한다.
+
+- 스프링 MVC
+  
+@Controller :
+스프링이 자동으로 스프링 빈으로 등록한다. (내부에 @Component 애노테이션이 있어서 컴포넌트 스캔의대상이 됨)
+스프링 MVC에서 애노테이션 기반 컨트롤러로 인식한다.
+@RequestMapping : 요청 정보를 매핑한다. 해당 URL이 호출되면 이 메서드가 호출된다. 
+애노테이션을 기반으로 동작하기 때문에, 메서드의 이름은 임의로 지으면 된다.
+ModelAndView : 모델과 뷰 정보를 담아서 반환하면 된다.
+
 -------------
 #### 6. 스프링 MVC - 기본 기능
 -------------
