@@ -80,8 +80,14 @@
 
    - 스프링 웹 MVC의 "DispatcherServlet"이 FrontController 패턴으로 구현되어있음
  - View 분리 : MyView 클래스 분리
- - Model 추가 : 
+![image](https://github.com/Inflearn-Springboot/SpringMVC-1-/assets/96871403/01bf31b7-3ef2-4ba0-becf-a0e27417bdbc)
+ - Model 추가 : 서블릿 종속성 제거
+request 객체를 Model로 사용하는 대신에 별도의 Model 객체를 만들어서 반환하면 된다.
+![image](https://github.com/Inflearn-Springboot/SpringMVC-1-/assets/96871403/33162f73-52c5-4fb0-8d4b-f5074d7195de)
+
  - 실용적이고 유연한 컨트롤러로 업그레이드
+![image](https://github.com/Inflearn-Springboot/SpringMVC-1-/assets/96871403/42662142-ca16-4724-a034-57b93e8df23c)
+
 -------------
 #### 5. 스프링 MVC - 구조 이해
 -------------
