@@ -131,5 +131,27 @@ ModelAndView : 모델과 뷰 정보를 담아서 반환하면 된다.
 
 -------------
 #### 6. 스프링 MVC - 기본 기능
+
+@RestController:
+@Controller 는 반환 값이 String 이면 뷰 이름으로 인식된다. 그래서 뷰를 찾고 뷰가 랜더링 된다.
+@RestController 는 반환 값으로 뷰를 찾는 것이 아니라, HTTP 메시지 바디에 바로 입력한다. 따라서 실행 결과로 ok 메세지를 받을 수 있다. @ResponseBody 와 관련이 있는데, 뒤에서 더 자세히 설명한다.
+
+@Slf4j: 코드를 자동으로 생성해서 로그를 선언해준다. 개발자는 편리하게 log 라고 사용하면 된다.
+
+스프링MVC는 @ModelAttribute 가 있으면 다음을 실행한다.
+HelloData 객체를 생성한다.요청 파라미터의 이름으로 HelloData 객체의 프로퍼티를 찾는다. 그리고 해당 프로퍼티의 setter를 호출해서 파라미터의 값을 입력(바인딩) 한다.
+예) 파라미터 이름이 username 이면 setUsername() 메서드를 찾아서 호출하면서 값을 입력한다.
+
+@RequestBody:
+@RequestBody 를 사용하면 HTTP 메시지 바디 정보를 편리하게 조회할 수 있다. 참고로 헤더 정보가 필요하다면
+HttpEntity 를 사용하거나 @RequestHeader 를 사용하면 된다.
+
+@RestController:
+@Controller 대신에 @RestController 애노테이션을 사용하면, 해당 컨트롤러에 모두 @ResponseBody 가
+적용되는 효과가 있다. 따라서 뷰 템플릿을 사용하는 것이 아니라, HTTP 메시지 바디에 직접 데이터를 입력한다. 이름
+그대로 Rest API(HTTP API)를 만들 때 사용하는 컨트롤러이다.
+
+![image](https://github.com/Inflearn-Springboot/SpringMVC-1-/assets/96871403/d423c30f-9f9a-4796-a620-434459d3b4b5)
+
 -------------
 #### 7. 스프링 MVC - 웹 페이지 만들기
