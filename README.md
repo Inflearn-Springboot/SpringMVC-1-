@@ -155,3 +155,30 @@ HttpEntity 를 사용하거나 @RequestHeader 를 사용하면 된다.
 
 -------------
 #### 7. 스프링 MVC - 웹 페이지 만들기
+
+## 타임리프 문법
+
+- 타임리프 핵심
+핵심은 th:xxx 가 붙은 부분은 서버사이드에서 렌더링 되고, 기존 것을 대체한다. th:xxx 이 없으면 기존 html
+의 xxx 속성이 그대로 사용된다.
+HTML을 파일로 직접 열었을 때, th:xxx 가 있어도 웹 브라우저는 th: 속성을 알지 못하므로 무시한다.
+따라서 HTML을 파일 보기를 유지하면서 템플릿 기능도 할 수 있다.
+
+- 리터럴 대체 - |...| :이렇게 사용한다.
+타임리프에서 문자와 표현식 등은 분리되어 있기 때문에 더해서 사용해야 한다.
+<span th:text="'Welcome to our application, ' + ${[user.name](http://user.name/)} + '!'">
+다음과 같이 리터럴 대체 문법을 사용하면, 더하기 없이 편리하게 사용할 수 있다.
+<span th:text="|Welcome to our application, ${[user.name](http://user.name/)}!|">
+
+
+- @ModelAttribute - Model 추가
+@ModelAttribute 는 중요한 한가지 기능이 더 있는데, 바로 모델(Model)에 @ModelAttribute 로 지정한 객체
+를 자동으로 넣어준다. 지금 코드를 보면 model.addAttribute("item", item) 가 주석처리 되어 있어도 잘 동
+작하는 것을 확인할 수 있다
+
+![image](https://github.com/Inflearn-Springboot/SpringMVC-1-/assets/96871403/710714bd-8c21-45e7-8617-09feacaee051)
+
+웹 브라우저의 새로 고침은 마지막에 서버에 전송한 데이터를 다시 전송한다.
+새로 고침 문제를 해결하려면 상품 저장 후에 뷰 템플릿으로 이동하는 것이 아니라, 상품 상세 화면으로 리다이렉트를 호출해주면 된다.
+웹 브라우저는 리다이렉트의 영향으로 상품 저장 후에 실제 상품 상세 화면으로 다시 이동한다. 따라서 마지막에 호출한 내용이 상품 상세 화면인 GET /items/{id} 가 되는 것이다.
+이후 새로고침을 해도 상품 상세 화면으로 이동하게 되므로 새로 고침 문제를 해결할 수 있다.
